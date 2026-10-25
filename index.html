@@ -1,482 +1,190 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aayu's Crazy World 🎮</title>
-
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: "Comic Sans MS", "Trebuchet MS", sans-serif;
-    background: linear-gradient(135deg, #ffb6e6, #c6b7ff, #8eeeff);
-    color: #34204f;
-    text-align: center;
-    overflow-x: hidden;
-}
-
-section {
-    padding: 65px 20px;
-}
-
-h1, h2 {
-    margin-bottom: 20px;
-}
-
-h2 {
-    font-size: clamp(1.8rem, 5vw, 2.5rem);
-}
-
-p {
-    line-height: 1.7;
-}
-
-button, .fun-button {
-    border: none;
-    padding: 13px 24px;
-    border-radius: 30px;
-    background: #ffdf45;
-    color: #39204f;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    margin: 10px;
-    box-shadow: 0 5px 0 #d7a91b;
-    transition: transform 0.25s;
-}
-
-button:hover, .fun-button:hover {
-    transform: translateY(-5px) rotate(-2deg);
-}
-
-/* Floating decorations */
-.floating {
-    position: fixed;
-    z-index: -1;
-    font-size: 30px;
-    pointer-events: none;
-    animation: float 5s ease-in-out infinite;
-}
-
-.f1 { top: 15%; left: 4%; }
-.f2 { top: 40%; right: 5%; animation-delay: 1s; }
-.f3 { bottom: 15%; left: 7%; animation-delay: 2s; }
-.f4 { top: 70%; right: 10%; animation-delay: 1.5s; }
-
-@keyframes float {
-    0%, 100% { transform: translateY(0) rotate(0); }
-    50% { transform: translateY(-25px) rotate(15deg); }
-}
-
-/* Hero */
-.hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 35px 18px;
-    background:
-        radial-gradient(circle at 15% 20%, #fff6a6 0 7%, transparent 8%),
-        radial-gradient(circle at 85% 75%, #ffb9e8 0 8%, transparent 9%);
-}
-
-.hero h1 {
-    font-size: clamp(2.7rem, 9vw, 5.5rem);
-    color: #ff287b;
-    text-shadow: 4px 4px 0 white, 7px 7px 0 #8e5bff;
-    animation: bounce 2s infinite;
-}
-
-@keyframes bounce {
-    0%, 100% { transform: translateY(0) rotate(-1deg); }
-    50% { transform: translateY(-13px) rotate(1deg); }
-}
-
-.hero p {
-    max-width: 650px;
-    font-size: 1.15rem;
-    margin: 12px auto;
-}
-
-.avatar {
-    font-size: 100px;
-    margin: 15px;
-    display: inline-block;
-    animation: dance 1.5s infinite ease-in-out;
-}
-
-@keyframes dance {
-    0%, 100% { transform: rotate(-8deg) scale(1); }
-    50% { transform: rotate(8deg) scale(1.12); }
-}
-
-.pill {
-    display: inline-block;
-    background: white;
-    border: 2px dashed #ff62a9;
-    padding: 9px 16px;
-    margin: 6px;
-    border-radius: 25px;
-    font-weight: bold;
-}
-
-/* Cards */
-.cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-    gap: 22px;
-    max-width: 1050px;
-    margin: 30px auto 0;
-}
-
-.card {
-    background: rgba(255,255,255,0.88);
-    padding: 28px 20px;
-    border-radius: 25px;
-    box-shadow: 0 9px 0 rgba(98, 51, 145, 0.18);
-    transition: transform 0.3s, box-shadow 0.3s;
-    border: 3px solid white;
-}
-
-.card:hover {
-    transform: translateY(-10px) rotate(2deg);
-    box-shadow: 0 15px 25px rgba(75, 35, 110, 0.2);
-}
-
-.card .emoji {
-    font-size: 55px;
-    margin-bottom: 12px;
-    display: inline-block;
-    animation: wiggle 2s infinite;
-}
-
-@keyframes wiggle {
-    0%, 90%, 100% { transform: rotate(0); }
-    93% { transform: rotate(-12deg); }
-    97% { transform: rotate(12deg); }
-}
-
-.card h3 {
-    font-size: 1.4rem;
-    margin-bottom: 10px;
-    color: #883bd0;
-}
-
-/* School vs gaming */
-.battle {
-    background: linear-gradient(120deg, #fff4a9, #ffc5e8);
-}
-
-.battle-box {
-    max-width: 750px;
-    margin: 25px auto;
-    padding: 25px;
-    background: white;
-    border-radius: 25px;
-    box-shadow: 0 8px 0 #df9dca;
-}
-
-.battle-line {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    gap: 15px;
-    flex-wrap: wrap;
-    font-size: 1.15rem;
-}
-
-.battle-line div {
-    padding: 15px;
-    flex: 1;
-    min-width: 130px;
-}
-
-.vs {
-    font-size: 2rem;
-    color: #ff287b;
-    animation: pulse 1s infinite alternate;
-}
-
-@keyframes pulse {
-    to { transform: scale(1.3); }
-}
-
-/* Funny speech bubbles */
-.bubble {
-    background: #fff;
-    border-radius: 25px;
-    padding: 20px;
-    max-width: 600px;
-    margin: 25px auto;
-    font-size: 1.15rem;
-    border: 3px dashed #b58aff;
-    animation: bubble 3s infinite;
-}
-
-@keyframes bubble {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.025); }
-}
-
-.quote {
-    font-size: 1.25rem;
-    font-weight: bold;
-    color: #ed287b;
-}
-
-/* Progress bar */
-.progress-wrap {
-    background: #e8dcff;
-    border-radius: 25px;
-    height: 24px;
-    overflow: hidden;
-    margin: 20px 0;
-}
-
-.progress {
-    height: 100%;
-    width: 85%;
-    background: linear-gradient(90deg, #ff6baf, #a76bff);
-    border-radius: 25px;
-    animation: progress 3s ease-in-out infinite alternate;
-}
-
-@keyframes progress {
-    from { width: 20%; }
-    to { width: 85%; }
-}
-
-/* Footer */
-footer {
-    padding: 35px 15px;
-    background: #543078;
-    color: white;
-}
-
-footer p {
-    margin: 8px;
-}
-
-.heart {
-    display: inline-block;
-    color: #ff80bd;
-    animation: heartbeat 0.8s infinite alternate;
-}
-
-@keyframes heartbeat {
-    to { transform: scale(1.4); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-        transition-duration: 0.01ms !important;
-    }
-}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:"Comic Sans MS","Trebuchet MS",sans-serif;background:linear-gradient(135deg,#ffb6e6,#c6b7ff,#8eeeff);color:#34204f;text-align:center;overflow-x:hidden}
+section{padding:65px 20px}h1,h2{margin-bottom:20px}h2{font-size:clamp(1.8rem,5vw,2.5rem)}p{line-height:1.7}
+button,.fun-button{border:none;padding:13px 24px;border-radius:30px;background:#ffdf45;color:#39204f;font-size:1rem;font-weight:bold;cursor:pointer;text-decoration:none;display:inline-block;margin:10px;box-shadow:0 5px 0 #d7a91b;transition:transform .25s}
+button:hover,.fun-button:hover{transform:translateY(-4px) rotate(-1deg)}
+.floating{position:fixed;z-index:-1;font-size:30px;pointer-events:none;animation:float 5s ease-in-out infinite}
+.f1{top:15%;left:4%}.f2{top:40%;right:5%;animation-delay:1s}.f3{bottom:15%;left:7%;animation-delay:2s}.f4{top:70%;right:10%;animation-delay:1.5s}
+@keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-25px) rotate(15deg)}}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:35px 18px;background:radial-gradient(circle at 15% 20%,#fff6a6 0 7%,transparent 8%),radial-gradient(circle at 85% 75%,#ffb9e8 0 8%,transparent 9%)}
+.hero h1{font-size:clamp(2.7rem,9vw,5.5rem);color:#ff287b;text-shadow:4px 4px 0 white,7px 7px 0 #8e5bff;animation:bounce 2s infinite}
+@keyframes bounce{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-13px) rotate(1deg)}}
+.hero p{max-width:650px;font-size:1.15rem;margin:12px auto}.avatar{font-size:100px;margin:15px;display:inline-block;animation:dance 1.5s infinite ease-in-out}
+@keyframes dance{0%,100%{transform:rotate(-8deg) scale(1)}50%{transform:rotate(8deg) scale(1.12)}}
+.pill{display:inline-block;background:white;border:2px dashed #ff62a9;padding:9px 16px;margin:6px;border-radius:25px;font-weight:bold}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:22px;max-width:1050px;margin:30px auto 0}
+.card{background:rgba(255,255,255,.9);padding:28px 20px;border-radius:25px;box-shadow:0 9px 0 rgba(98,51,145,.18);transition:transform .3s,box-shadow .3s;border:3px solid white}
+.card:hover{transform:translateY(-8px) rotate(1deg);box-shadow:0 15px 25px rgba(75,35,110,.2)}
+.card .emoji{font-size:55px;margin-bottom:12px;display:inline-block;animation:wiggle 2s infinite}
+@keyframes wiggle{0%,90%,100%{transform:rotate(0)}93%{transform:rotate(-12deg)}97%{transform:rotate(12deg)}}
+.card h3{font-size:1.4rem;margin-bottom:10px;color:#883bd0}
+.battle{background:linear-gradient(120deg,#fff4a9,#ffc5e8)}.battle-box{max-width:750px;margin:25px auto;padding:25px;background:white;border-radius:25px;box-shadow:0 8px 0 #df9dca}
+.battle-line{display:flex;align-items:center;justify-content:space-around;gap:15px;flex-wrap:wrap;font-size:1.15rem}.battle-line div{padding:15px;flex:1;min-width:130px}
+.vs{font-size:2rem;color:#ff287b;animation:pulse 1s infinite alternate}@keyframes pulse{to{transform:scale(1.2)}}
+.bubble{background:#fff;border-radius:25px;padding:20px;max-width:600px;margin:25px auto;font-size:1.15rem;border:3px dashed #b58aff;animation:bubble 3s infinite}
+@keyframes bubble{0%,100%{transform:scale(1)}50%{transform:scale(1.015)}}
+.quote{font-size:1.25rem;font-weight:bold;color:#ed287b}
+.progress-wrap{background:#e8dcff;border-radius:25px;height:24px;overflow:hidden;margin:20px 0}.progress{height:100%;width:85%;background:linear-gradient(90deg,#ff6baf,#a76bff);border-radius:25px;animation:progress 3s ease-in-out infinite alternate}
+@keyframes progress{from{width:20%}to{width:85%}}
+.mini-games{background:linear-gradient(135deg,#fff0f8,#eee7ff,#e1fbff)}
+.game-category{max-width:1100px;margin:35px auto}.game-category h3{font-size:1.7rem;margin-bottom:18px;color:#883bd0}
+.mini-game-card{background:white;border:3px solid white;border-radius:24px;padding:22px 15px;box-shadow:0 7px 0 rgba(98,51,145,.16);transition:transform .25s}
+.mini-game-card:hover{transform:translateY(-6px) rotate(1deg)}.mini-game-card .emoji{font-size:45px}.mini-game-card h4{color:#883bd0;font-size:1.2rem;margin:10px 0}.mini-game-card p{font-size:.95rem}
+.game-play-area{max-width:750px;margin:35px auto 0;padding:25px;background:white;border:4px solid #ffb9e8;border-radius:28px;box-shadow:0 8px 0 #d9b6ff}
+.game-question{font-size:1.2rem;font-weight:bold;margin:20px 0}.game-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:20px 0}
+.game-options button{margin:0;box-shadow:0 4px 0 #d7a91b}.game-feedback{min-height:55px;padding:12px;font-weight:bold;font-size:1.05rem}.game-score{background:#eee5ff;border-radius:15px;padding:12px;font-weight:bold}.game-small-button{background:#a76bff;color:white;box-shadow:0 4px 0 #7040b3}
+.game-options button:disabled{opacity:.7;cursor:default;transform:none}
+footer{padding:35px 15px;background:#543078;color:white}footer p{margin:8px}.heart{display:inline-block;color:#ff80bd;animation:heartbeat .8s infinite alternate}@keyframes heartbeat{to{transform:scale(1.3)}}
+@media(max-width:480px){.game-play-area{padding:17px}.game-options{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
 </style>
 </head>
-
 <body>
+<div class="floating f1">⭐</div><div class="floating f2">🎮</div><div class="floating f3">💖</div><div class="floating f4">🌈</div>
 
-<!-- Floating decorations -->
-<div class="floating f1">⭐</div>
-<div class="floating f2">🎮</div>
-<div class="floating f3">💖</div>
-<div class="floating f4">🌈</div>
-
-<!-- Welcome -->
 <section class="hero">
-    <div class="avatar">👧🏻🎮</div>
-
-    <h1>HEY, I'M AAYU!</h1>
-
-    <p>
-        Welcome to my crazy little world! 🌈<br>
-        I am 9 years old, a Class 2 student,
-        and a PROFESSIONAL tablet gamer! 😂
-    </p>
-
-    <div>
-        <span class="pill">🎂 Age: 9</span>
-        <span class="pill">📚 Class 2</span>
-        <span class="pill">🏫 St. Francis de Sales School</span>
-    </div>
-
-    <p class="quote">
-        "Homework? Wait! Let me finish this game first!" 🤣
-    </p>
-
-    <a href="#games" class="fun-button">ENTER MY WORLD 🚀</a>
+<div class="avatar">👧🏻🎮</div><h1>HEY, I'M AAYU!</h1>
+<p>Welcome to my crazy little world! 🌈<br>I am 9 years old, a Class 2 student, and a PROFESSIONAL tablet gamer! 😂</p>
+<div><span class="pill">🎂 Age: 9</span><span class="pill">📚 Class 2</span><span class="pill">🏫 St. Francis de Sales School</span></div>
+<p class="quote">"Homework? Wait! Let me finish this game first!" 🤣</p><a href="#games" class="fun-button">ENTER MY WORLD 🚀</a>
+<a href="#mini-games" class="fun-button">PLAY 15 MINI GAMES 🧠</a>
 </section>
 
-<!-- About -->
-<section>
-    <h2>👑 Who Is Aayu?</h2>
+<section><h2>👑 Who Is Aayu?</h2><div class="cards">
+<div class="card"><div class="emoji">😎</div><h3>Cool Girl</h3><p>Attitude level: 1000%<br>Homework mood: Loading...</p></div>
+<div class="card"><div class="emoji">📚</div><h3>School Star</h3><p>Class 2 student by day.<br>Gaming legend after school!</p></div>
+<div class="card"><div class="emoji">📱</div><h3>Tablet Queen</h3><p>Battery at 5%? Panic!<br>Homework at 5 pages? Sleep! 😂</p></div>
+</div></section>
 
-    <div class="cards">
-        <div class="card">
-            <div class="emoji">😎</div>
-            <h3>Cool Girl</h3>
-            <p>Attitude level: 1000%<br>
-            Homework mood: Loading...</p>
-        </div>
+<section id="games" style="background:rgba(255,255,255,.25)"><h2>🎮 Aayu's Gaming Zone</h2><p>Warning: Do not disturb the champion! 😂</p><div class="cards">
+<div class="card"><div class="emoji">👻</div><h3>Kamla</h3><p>Scary game? No problem!<br>Aayu is braver than the ghosts! 😱</p></div>
+<div class="card"><div class="emoji">🧱</div><h3>Roblox</h3><p>Building, playing and exploring!<br>Just one more game... times 100! 🤭</p></div>
+<div class="card"><div class="emoji">🔥</div><h3>Free Fire</h3><p>Mission: Play like a champion!<br>Victory dance activated! 💃</p></div>
+</div><div class="bubble"><p>🎤 Aayu's gaming announcement:</p><p class="quote">"I CAN'T HEAR YOU... I'M GAMING!" 🤣</p></div></section>
 
-        <div class="card">
-            <div class="emoji">📚</div>
-            <h3>School Star</h3>
-            <p>Class 2 student by day.<br>
-            Gaming legend after school!</p>
-        </div>
+<section class="battle"><h2>⚔️ The Great Daily Battle</h2><p>Who wins in Aayu's world?</p><div class="battle-box"><div class="battle-line">
+<div><div style="font-size:55px">📚</div><h3>Homework</h3><p>"Aayu, come study!"</p></div><div class="vs">VS</div><div><div style="font-size:55px">🎮</div><h3>Tablet Games</h3><p>"Aayu, let's play!"</p></div>
+</div><h3 style="margin-top:25px">Aayu's gaming temptation level 😂</h3><div class="progress-wrap"><div class="progress"></div></div><p>Good news: Aayu can win at BOTH school and games with a little balance! 🏆</p></div><div class="bubble">👩‍🏫 Teacher: "Where is your homework?"<br>👧 Aayu: "Miss, it is in my imagination!" 🤣</div></section>
 
-        <div class="card">
-            <div class="emoji">📱</div>
-            <h3>Tablet Queen</h3>
-            <p>Battery at 5%? Panic!<br>
-            Homework at 5 pages? Sleep! 😂</p>
-        </div>
-    </div>
+<section><h2>📺 Aayu's Watch Time</h2><div class="cards">
+<div class="card"><div class="emoji">📺</div><h3>Piyu &amp; Family</h3><p>Her favorite family fun! 💕<br>One video becomes five... oops! 😆</p></div>
+<div class="card"><div class="emoji">🍿</div><h3>Relax Mode</h3><p>Grab a snack, get comfy,<br>and enjoy the show!</p></div>
+</div></section>
+
+<section class="mini-games" id="mini-games">
+<h2>🎪 Aayu's Ultimate Mini Games Arcade!</h2><p>Play, laugh, learn and become a brain-power superstar! 🌟</p>
+<div class="game-category"><h3>😂 Funny Games — 5 Challenges</h3><div class="cards">
+<div class="mini-game-card"><div class="emoji">🤣</div><h4>Joke Attack</h4><p>Can you solve a super-silly joke?</p><button onclick="playGame('joke')">Play 😂</button></div>
+<div class="mini-game-card"><div class="emoji">🐸</div><h4>Silly Sentences</h4><p>Meet the frog who loves maths!</p><button onclick="playGame('silly')">Play 🐸</button></div>
+<div class="mini-game-card"><div class="emoji">🍕</div><h4>Emoji Detective</h4><p>Guess the silly thing hidden in emojis.</p><button onclick="playGame('emoji')">Play 🔎</button></div>
+<div class="mini-game-card"><div class="emoji">👅</div><h4>Funny Challenge</h4><p>Pick a tongue-twister challenge!</p><button onclick="playGame('tongue')">Play 😜</button></div>
+<div class="mini-game-card"><div class="emoji">🐱</div><h4>Animal Laughs</h4><p>Test your funny animal knowledge.</p><button onclick="playGame('animal')">Play 🐾</button></div>
+</div></div>
+
+<div class="game-category"><h3>📚 Study Games — 5 Challenges</h3><div class="cards">
+<div class="mini-game-card"><div class="emoji">➕</div><h4>Maths Master</h4><p>Quick addition and subtraction!</p><button onclick="playGame('math')">Play ➕</button></div>
+<div class="mini-game-card"><div class="emoji">🔤</div><h4>Spelling Bee</h4><p>Pick the correct spelling.</p><button onclick="playGame('spelling')">Play 🐝</button></div>
+<div class="mini-game-card"><div class="emoji">🔀</div><h4>Word Scramble</h4><p>Unscramble a mixed-up word.</p><button onclick="playGame('word')">Play 🔤</button></div>
+<div class="mini-game-card"><div class="emoji">🌍</div><h4>Science Explorer</h4><p>Discover fun facts about our world.</p><button onclick="playGame('science')">Play 🔬</button></div>
+<div class="mini-game-card"><div class="emoji">✖️</div><h4>Times Table Hero</h4><p>Become a multiplication champion.</p><button onclick="playGame('times')">Play 🏆</button></div>
+</div></div>
+
+<div class="game-category"><h3>🧠 IQ Games — 5 Brain Challenges</h3><div class="cards">
+<div class="mini-game-card"><div class="emoji">❓</div><h4>Brain Riddles</h4><p>Think carefully and solve a riddle.</p><button onclick="playGame('riddle')">Play 🧩</button></div>
+<div class="mini-game-card"><div class="emoji">🔢</div><h4>Number Detective</h4><p>Find the missing number in a pattern.</p><button onclick="playGame('sequence')">Play 🔢</button></div>
+<div class="mini-game-card"><div class="emoji">👀</div><h4>Odd One Out</h4><p>Find the item that doesn't belong.</p><button onclick="playGame('odd')">Play 👀</button></div>
+<div class="mini-game-card"><div class="emoji">🕵️</div><h4>Logic Detective</h4><p>Use clues to solve a little mystery.</p><button onclick="playGame('logic')">Play 🔍</button></div>
+<div class="mini-game-card"><div class="emoji">🧠</div><h4>Memory Master</h4><p>Remember the number sequence!</p><button onclick="playGame('memory')">Play 🧠</button></div>
+</div></div>
+
+<div class="game-play-area" id="gameArea" aria-live="polite"><h2>🎮 Ready, Aayu?</h2><p>Choose any game above to begin your adventure!</p><div class="game-score" id="gameScore">⭐ Score: 0</div><div id="gameContent"></div></div>
 </section>
 
-<!-- Games -->
-<section id="games" style="background: rgba(255,255,255,0.25);">
-    <h2>🎮 Aayu's Gaming Zone</h2>
-    <p>Warning: Do not disturb the champion! 😂</p>
+<section style="background:linear-gradient(135deg,#ffb8e7,#c3b3ff)"><h2>🌟 Aayu's Secret Superpower</h2><div class="avatar">🦸🏻‍♀️</div>
+<p class="quote">Play like a champion.<br>Study like a superstar.<br>Laugh like nobody is watching! 😁</p>
+<p style="margin-top:20px">Remember, Aayu: finish your homework, take breaks from the screen, and make time for play, family and fun! 💖</p>
+<button onclick="alert('Aayu, you are AWESOME! 🎉 Finish your homework, then enjoy your game time! 😂')">CLICK FOR A SURPRISE 🎁</button></section>
+<footer><p>Made with <span class="heart">💖</span> for Aayu</p><p>👑 The One and Only Tablet Queen 👑</p><p>© Aayu's Crazy World 🌈</p></footer>
 
-    <div class="cards">
-        <div class="card">
-            <div class="emoji">👻</div>
-            <h3>Kamla</h3>
-            <p>Scary game? No problem!<br>
-            Aayu is braver than the ghosts! 😱</p>
-        </div>
-
-        <div class="card">
-            <div class="emoji">🧱</div>
-            <h3>Roblox</h3>
-            <p>Building, playing and exploring!<br>
-            Just one more game... times 100! 🤭</p>
-        </div>
-
-        <div class="card">
-            <div class="emoji">🔥</div>
-            <h3>Free Fire</h3>
-            <p>Mission: Play like a champion!<br>
-            Victory dance activated! 💃</p>
-        </div>
-    </div>
-
-    <div class="bubble">
-        <p>🎤 Aayu's gaming announcement:</p>
-        <p class="quote">
-            "I CAN'T HEAR YOU... I'M GAMING!" 🤣
-        </p>
-    </div>
-</section>
-
-<!-- School versus games -->
-<section class="battle">
-    <h2>⚔️ The Great Daily Battle</h2>
-    <p>Who wins in Aayu's world?</p>
-
-    <div class="battle-box">
-        <div class="battle-line">
-            <div>
-                <div style="font-size: 55px;">📚</div>
-                <h3>Homework</h3>
-                <p>"Aayu, come study!"</p>
-            </div>
-
-            <div class="vs">VS</div>
-
-            <div>
-                <div style="font-size: 55px;">🎮</div>
-                <h3>Tablet Games</h3>
-                <p>"Aayu, let's play!"</p>
-            </div>
-        </div>
-
-        <h3 style="margin-top: 25px;">Aayu's gaming temptation level 😂</h3>
-
-        <div class="progress-wrap">
-            <div class="progress"></div>
-        </div>
-
-        <p>
-            Good news: Aayu can win at BOTH school and games
-            with a little balance! 🏆
-        </p>
-    </div>
-
-    <div class="bubble">
-        👩‍🏫 Teacher: "Where is your homework?"<br>
-        👧 Aayu: "Miss, it is in my imagination!" 🤣
-    </div>
-</section>
-
-<!-- Favorite videos -->
-<section>
-    <h2>📺 Aayu's Watch Time</h2>
-
-    <div class="cards">
-        <div class="card">
-            <div class="emoji">📺</div>
-            <h3>Piyu &amp; Family</h3>
-            <p>Her favorite family fun! 💕<br>
-            One video becomes five... oops! 😆</p>
-        </div>
-
-        <div class="card">
-            <div class="emoji">🍿</div>
-            <h3>Relax Mode</h3>
-            <p>Grab a snack, get comfy,<br>
-            and enjoy the show!</p>
-        </div>
-    </div>
-</section>
-
-<!-- Final message -->
-<section style="background: linear-gradient(135deg, #ffb8e7, #c3b3ff);">
-    <h2>🌟 Aayu's Secret Superpower</h2>
-
-    <div class="avatar">🦸🏻‍♀️</div>
-
-    <p class="quote">
-        Play like a champion.<br>
-        Study like a superstar.<br>
-        Laugh like nobody is watching! 😁
-    </p>
-
-    <p style="margin-top: 20px;">
-        Remember, Aayu: finish your homework,
-        take breaks from the screen, and make time
-        for play, family and fun! 💖
-    </p>
-
-    <button onclick="alert('Aayu, you are AWESOME! 🎉 Now go finish your homework and then enjoy your game time! 😂')">
-        CLICK FOR A SURPRISE 🎁
-    </button>
-</section>
-
-<footer>
-    <p>Made with <span class="heart">💖</span> for Aayu</p>
-    <p>👑 The One and Only Tablet Queen 👑</p>
-    <p>© Aayu's Crazy World 🌈</p>
-</footer>
-
+<script>
+const gameQuestions={
+joke:[
+{q:"Why did the student eat his homework?",options:["He was hungry","It was a piece of cake","The teacher was a chef"],a:1,explain:"😂 Because the teacher said it was a piece of cake!"},
+{q:"What has four wheels and flies?",options:["A racing car","A garbage truck","A flying bicycle"],a:1,explain:"🤣 A garbage truck! Flies love rubbish."}],
+silly:[{q:"What might a frog say before a maths test?",options:["Ribbit and calculate!","Give me pizza!","I am a dinosaur!"],a:0,explain:"🐸 Ribbit and calculate! That frog is ready."}],
+emoji:[
+{q:"🍎 + 🥧 = What yummy treat?",options:["Apple pie","Banana soup","Chocolate pizza"],a:0,explain:"🥧 Apple pie! Delicious detective work."},
+{q:"🌧️ + 🌈 = What might appear?",options:["A rainbow","A snowman","A volcano"],a:0,explain:"🌈 A rainbow! Nature's colourful surprise."}],
+tongue:[{q:"Which phrase is a tongue twister?",options:["She sells seashells","I like apples","The sun is hot"],a:0,explain:"👅 Try saying 'She sells seashells' three times quickly!"}],
+animal:[{q:"Which animal carries a protective shell on its back?",options:["Turtle","Horse","Lion"],a:0,explain:"🐢 A turtle! Its shell protects its body."}],
+math:[
+{q:"What is 8 + 7?",options:["14","15","16"],a:1,explain:"➕ 8 + 7 = 15. Great counting!"},
+{q:"What is 20 − 6?",options:["12","14","16"],a:1,explain:"➖ 20 − 6 = 14."},
+{q:"Riya has 5 apples and gets 4 more. How many?",options:["8","9","10"],a:1,explain:"🍎 5 + 4 = 9 apples."}],
+spelling:[
+{q:"Choose the correct spelling.",options:["Skool","School","Scool"],a:1,explain:"📚 SCHOOL — S-C-H-O-O-L!"},
+{q:"Choose the correct spelling.",options:["Frend","Freind","Friend"],a:2,explain:"🤝 FRIEND is the correct spelling."}],
+word:[
+{q:"Unscramble: TAC",options:["ACT","CAT","Both ACT and CAT"],a:2,explain:"🔤 Both ACT and CAT can be made from TAC!"},
+{q:"Unscramble: GOD",options:["DOG","DIG","DOT"],a:0,explain:"🐶 DOG! Woof, you got it."}],
+science:[
+{q:"Which star gives Earth light and warmth?",options:["The Sun","The Moon","Polaris"],a:0,explain:"☀️ The Sun provides most of Earth's light and warmth."},
+{q:"Which part of a plant usually absorbs water?",options:["Flower","Roots","Fruit"],a:1,explain:"🌱 Roots absorb water from the soil."}],
+times:[
+{q:"What is 3 × 4?",options:["7","12","16"],a:1,explain:"✖️ 3 groups of 4 make 12."},
+{q:"What is 5 × 2?",options:["10","7","12"],a:0,explain:"🏆 5 × 2 = 10!"},
+{q:"What is 2 × 6?",options:["8","10","12"],a:2,explain:"⭐ 2 × 6 = 12."}],
+riddle:[
+{q:"What has hands but cannot clap?",options:["A monkey","A clock","A robot"],a:1,explain:"🕒 A clock has hands but cannot clap!"},
+{q:"What has a face and two hands but no arms or legs?",options:["A clock","A teddy bear","A book"],a:0,explain:"⏰ A clock!"}],
+sequence:[
+{q:"What number comes next? 2, 4, 6, 8, __",options:["9","10","12"],a:1,explain:"🔢 Add 2 each time. The answer is 10."},
+{q:"What number comes next? 5, 10, 15, __",options:["16","20","25"],a:1,explain:"🧠 Add 5 each time. The answer is 20."}],
+odd:[
+{q:"Which one does not belong?",options:["Apple","Mango","Carrot"],a:2,explain:"🥕 Carrot is usually considered a vegetable; apple and mango are fruits."},
+{q:"Which one does not belong?",options:["Dog","Cat","Eagle"],a:2,explain:"🦅 Eagle is a bird; dog and cat are mammals."}],
+logic:[
+{q:"Mia is taller than Ana. Ana is taller than Ria. Who is shortest?",options:["Mia","Ana","Ria"],a:2,explain:"🔍 Ria is shortest because both Mia and Ana are taller."},
+{q:"There are 3 birds on a tree. Two fly away. How many remain?",options:["1","2","3"],a:0,explain:"🐦 3 − 2 = 1 bird remains."}],
+memory:[
+{q:"Remember this sequence: 3, 1, 4. Which is the second number?",options:["3","1","4"],a:1,explain:"🧠 The sequence is 3, 1, 4. The second number is 1!"},
+{q:"Remember this sequence: 7, 2, 9, 5. Which is the last number?",options:["2","9","5"],a:2,explain:"🎉 The last number is 5!"}]
+};
+const gameNames={joke:"😂 Joke Attack",silly:"🐸 Silly Sentences",emoji:"🍕 Emoji Detective",tongue:"👅 Funny Challenge",animal:"🐱 Animal Laughs",math:"➕ Maths Master",spelling:"🔤 Spelling Bee",word:"🔀 Word Scramble",science:"🌍 Science Explorer",times:"✖️ Times Table Hero",riddle:"❓ Brain Riddles",sequence:"🔢 Number Detective",odd:"👀 Odd One Out",logic:"🕵️ Logic Detective",memory:"🧠 Memory Master"};
+let activeGame="",questionIndex=0,score=0,answered=false,roundQuestions=[];
+function playGame(name){
+activeGame=name;questionIndex=0;score=0;answered=false;
+roundQuestions=[...gameQuestions[name]].sort(()=>Math.random()-.5);
+document.getElementById("gameArea").scrollIntoView({behavior:"smooth",block:"center"});
+showQuestion();
+}
+function showQuestion(){
+const content=document.getElementById("gameContent"),scoreBox=document.getElementById("gameScore");answered=false;
+if(questionIndex>=roundQuestions.length){
+content.innerHTML=`<h2>🎉 Game Complete!</h2><p class="game-question">${score===roundQuestions.length?"WOW! Perfect score, Aayu! 🌟":"Great effort! Every game makes you better! 💖"}</p><p>You scored ${score} out of ${roundQuestions.length}.</p><button onclick="playGame('${activeGame}')">🔄 Play Again</button><button class="game-small-button" onclick="document.getElementById('mini-games').scrollIntoView({behavior:'smooth'})">🎮 Choose Another Game</button>`;
+scoreBox.textContent="🏆 Final Score: "+score+" / "+roundQuestions.length;return;
+}
+const item=roundQuestions[questionIndex];
+scoreBox.textContent="⭐ Score: "+score+" | Question "+(questionIndex+1)+" of "+roundQuestions.length;
+content.innerHTML=`<h2>${gameNames[activeGame]}</h2><div class="game-question">${item.q}</div><div class="game-options">${item.options.map((option,index)=>`<button onclick="checkAnswer(${index})">${option}</button>`).join("")}</div><div class="game-feedback" id="gameFeedback">🤔 Think carefully, superstar!</div><button id="nextQuestion" style="display:none" onclick="nextQuestion()">Next Challenge ➡️</button>`;
+}
+function checkAnswer(selected){
+if(answered)return;answered=true;const item=roundQuestions[questionIndex],buttons=document.querySelectorAll("#gameContent .game-options button");
+buttons.forEach(button=>button.disabled=true);
+const feedback=document.getElementById("gameFeedback");
+if(selected===item.a){score++;feedback.textContent="🎉 Correct! "+item.explain;}else{feedback.textContent="😊 Nice try! "+item.explain;}
+document.getElementById("gameScore").textContent="⭐ Score: "+score+" | Question "+(questionIndex+1)+" of "+roundQuestions.length;
+document.getElementById("nextQuestion").style.display="inline-block";
+}
+function nextQuestion(){questionIndex++;showQuestion();}
+</script>
 </body>
 </html>
